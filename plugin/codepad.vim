@@ -21,9 +21,13 @@
 if has('python')
   command! CPPaste python codepadPaste()
   command! CPRun python codepadRun()
+  command! CPPrivPaste python codepadPrivPaste()
+  command! CPPrivRun python codepadPrivRun()
 else
   command! CPPaste echo 'Only avaliable with +python support.'
   command! CPRun echo 'Only avaliable with +python support.'
+  command! CPPrivPaste echo 'Only avaliable with +python support.'
+  command! CPPrivRun echo 'Only avaliable with +python support.'
 endif
 
 if has('python')
@@ -45,7 +49,7 @@ def codepadLang(vimLang):
   }
   return filetypeMap.get(vimLang, 'Plain Text')
 
-def codepadGet(run):
+def codepadGet(run, private):
   import urllib
   import vim
 
@@ -57,6 +61,9 @@ def codepadGet(run):
   }
   if run:
     data['run'] = True
+
+  if private:
+      data['private'] = True
 
   response = urllib.urlopen(url, urllib.urlencode(data))
   return response.geturl()
@@ -71,6 +78,22 @@ def codepadPaste():
 
 def codepadRun():
   url = codepadGet(run=True)
+  import vim
+  vim.command("call setreg('+', '%s')" % url)
+  vim.command("call setreg('*', '%s')" % url)
+  import webbrowser
+  webbrowser.open(url)
+
+def codepadPrivPaste():
+  url = codepadGet(run=False, private=True)
+  import vim
+  vim.command("call setreg('+', '%s')" % url)
+  vim.command("call setreg('*', '%s')" % url)
+  import webbrowser
+  webbrowser.open(url)
+
+def codepadPrivRun():
+  url = codepadGet(run=True, private=True)
   import vim
   vim.command("call setreg('+', '%s')" % url)
   vim.command("call setreg('*', '%s')" % url)

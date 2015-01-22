@@ -14,4 +14,12 @@ The plugin adds two new commands:
     The URL of the pasted snippets is copied to the clipboard as well.
 
 
+:CPPrivPaste
+    to CPPaste privately.
+
+
+:CPPrivPaste
+    to CPRun privately.
+
+
 The correct filetype is automatically detected through the 'filetype' option.
