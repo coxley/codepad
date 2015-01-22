@@ -1,6 +1,8 @@
 This is a mirror of http://www.vim.org/scripts/script.php?script_id=2298
 
-The plugin adds two new commands:
+Must have +xterm_clipboard compiled into VIM.
+
+The plugin adds four new commands:
 
 :CPPaste
     to send the current buffer to http://codepad.org, open your pasted code
