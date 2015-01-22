@@ -49,7 +49,7 @@ def codepadLang(vimLang):
   }
   return filetypeMap.get(vimLang, 'Plain Text')
 
-def codepadGet(run, private):
+def codepadGet(run, private=False):
   import urllib
   import vim
 
